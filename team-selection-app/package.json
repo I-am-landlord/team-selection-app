@@ -1,0 +1,36 @@
+{
+  "name": "team-selection-app",
+  "version": "1.0.0",
+  "description": "Програма вибору команди з обробкою високого навантаження",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required'",
+    "deploy": "netlify deploy --prod",
+    "test": "node test/load-test.js"
+  },
+  "keywords": [
+    "team-selection",
+    "netlify",
+    "serverless",
+    "real-time"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/team-selection-app.git"
+  },
+  "netlify": {
+    "functions": {
+      "directory": "netlify/functions",
+      "node_bundler": "esbuild"
+    }
+  }
+}

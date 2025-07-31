@@ -1,0 +1,49 @@
+# netlify.toml - Конфігурація для Netlify
+
+[build]
+  # Команда для збірки (не потрібна для статичного сайту)
+  command = ""
+  # Папка з готовими файлами для публікації
+  publish = "."
+
+[functions]
+  # Папка з serverless функціями
+  directory = "netlify/functions"
+
+[[headers]]
+  # Заголовки для всіх файлів
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  # CORS заголовки для API функцій
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+
+[[redirects]]
+  # Fallback для SPA (якщо потрібно)
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Налаштування для розробки
+[dev]
+  command = "npx serve ."
+  port = 3000
+  publish = "."
+  functions = "netlify/functions"
+
+# Налаштування плагінів (опціонально)
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+# Налаштування форм (якщо потрібно)
+[template.environment]
+  NODE_VERSION = "18"
